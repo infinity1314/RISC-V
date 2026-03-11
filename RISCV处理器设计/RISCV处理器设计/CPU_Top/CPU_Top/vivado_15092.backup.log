@@ -1,0 +1,166 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Sat Jun 25 10:06:22 2022
+# Process ID: 15092
+# Current directory: G:/verilog project/CPU_Top/CPU_Top
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent2576 G:\verilog project\CPU_Top\CPU_Top\CPU_Top.xpr
+# Log file: G:/verilog project/CPU_Top/CPU_Top/vivado.log
+# Journal file: G:/verilog project/CPU_Top/CPU_Top\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.xpr}
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'G:/vivado2019.1/Vivado/2019.1/data/ip'.
+open_project: Time (s): cpu = 00:00:27 ; elapsed = 00:00:13 . Memory (MB): peak = 835.535 ; gain = 189.727
+update_compile_order -fileset sources_1
+open_hw
+connect_hw_server
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210251A08870
+open_hw_target: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2017.320 ; gain = 1109.898
+set_property PROGRAM.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.bit} [get_hw_devices xc7k325t_0]
+current_hw_device [get_hw_devices xc7k325t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7k325t_0] 0]
+INFO: [Labtools 27-1434] Device xc7k325t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+set_property PROBES.FILE {} [get_hw_devices xc7k325t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7k325t_0]
+set_property PROGRAM.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.bit} [get_hw_devices xc7k325t_0]
+program_hw_devices [get_hw_devices xc7k325t_0]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+program_hw_devices: Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2025.762 ; gain = 0.000
+refresh_hw_device [lindex [get_hw_devices xc7k325t_0] 0]
+INFO: [Labtools 27-1434] Device xc7k325t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+[Sat Jun 25 10:13:29 2022] Launched synth_1...
+Run output will be captured here: G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/synth_1/runme.log
+open_run synth_1 -name synth_1
+Design is defaulting to impl run constrset: constrs_1
+Design is defaulting to synth run part: xc7k325tffg676-2
+INFO: [Device 21-403] Loading part xc7k325tffg676-2
+INFO: [Netlist 29-17] Analyzing 644 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2019.1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [G:/verilog project/CPU_Top/CPU_Top/CPU_Top.srcs/constrs_1/new/1111.xdc]
+Finished Parsing XDC File [G:/verilog project/CPU_Top/CPU_Top/CPU_Top.srcs/constrs_1/new/1111.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 2454.102 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 12 instances were transformed.
+  RAM32M => RAM32M (RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMS32, RAMS32): 12 instances
+
+open_run: Time (s): cpu = 00:00:43 ; elapsed = 00:00:40 . Memory (MB): peak = 2653.520 ; gain = 584.469
+create_debug_core u_ila_0 ila
+set_property C_DATA_DEPTH 1024 [get_debug_cores u_ila_0]
+set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
+set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
+set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
+set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
+set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
+startgroup 
+set_property C_EN_STRG_QUAL true [get_debug_cores u_ila_0 ]
+set_property C_ADV_TRIGGER true [get_debug_cores u_ila_0 ]
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0 ]
+set_property ALL_PROBE_SAME_MU_CNT 4 [get_debug_cores u_ila_0 ]
+endgroup
+connect_debug_port u_ila_0/clk [get_nets [list clk_50M_IBUF_BUFG ]]
+set_property port_width 32 [get_debug_ports u_ila_0/probe0]
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
+connect_debug_port u_ila_0/probe0 [get_nets [list {Data_Mem_WriteData[0]} {Data_Mem_WriteData[1]} {Data_Mem_WriteData[2]} {Data_Mem_WriteData[3]} {Data_Mem_WriteData[4]} {Data_Mem_WriteData[5]} {Data_Mem_WriteData[6]} {Data_Mem_WriteData[7]} {Data_Mem_WriteData[8]} {Data_Mem_WriteData[9]} {Data_Mem_WriteData[10]} {Data_Mem_WriteData[11]} {Data_Mem_WriteData[12]} {Data_Mem_WriteData[13]} {Data_Mem_WriteData[14]} {Data_Mem_WriteData[15]} {Data_Mem_WriteData[16]} {Data_Mem_WriteData[17]} {Data_Mem_WriteData[18]} {Data_Mem_WriteData[19]} {Data_Mem_WriteData[20]} {Data_Mem_WriteData[21]} {Data_Mem_WriteData[22]} {Data_Mem_WriteData[23]} {Data_Mem_WriteData[24]} {Data_Mem_WriteData[25]} {Data_Mem_WriteData[26]} {Data_Mem_WriteData[27]} {Data_Mem_WriteData[28]} {Data_Mem_WriteData[29]} {Data_Mem_WriteData[30]} {Data_Mem_WriteData[31]} ]]
+save_constraints
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.015 . Memory (MB): peak = 2720.566 ; gain = 0.000
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.277 . Memory (MB): peak = 2723.348 ; gain = 2.781
+[Sat Jun 25 10:18:12 2022] Launched impl_1...
+Run output will be captured here: G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/runme.log
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Digilent/210251A08870
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210251A08870
+INFO: [Labtools 27-1434] Device xc7k325t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+set_property PROBES.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.ltx} [get_hw_devices xc7k325t_0]
+set_property FULL_PROBES.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.ltx} [get_hw_devices xc7k325t_0]
+set_property PROGRAM.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.bit} [get_hw_devices xc7k325t_0]
+program_hw_devices [get_hw_devices xc7k325t_0]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+program_hw_devices: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2775.969 ; gain = 0.000
+refresh_hw_device [lindex [get_hw_devices xc7k325t_0] 0]
+INFO: [Labtools 27-2302] Device xc7k325t (JTAG device index = 0) is programmed with a design that has 1 ILA core(s).
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+set_property TRIGGER_COMPARE_VALUE eq32'u0 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+set_property TRIGGER_COMPARE_VALUE eq32'u120 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2022-Jun-25 10:33:42
+wait_on_hw_ila -timeout 0 [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+INFO: [Labtools 27-1965] The ILA core 'hw_ila_1' trigger was stopped by user at 2022-Jun-25 10:36:24
+WARNING: [Labtools 27-157] hw_ila [hw_ila_1] stopped. No data to upload.
+set_property TRIGGER_COMPARE_VALUE eq32'b0000_0000_0000_0000_0000_0000_0111_1000 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+set_property TRIGGER_COMPARE_VALUE eq32'u120 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+set_property TRIGGER_COMPARE_VALUE eq32'u0 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2022-Jun-25 10:36:53
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2022-Jun-25 10:36:53
+INFO: [Labtools 27-3304] ILA Waveform data saved to file G:/verilog project/CPU_Top/CPU_Top/CPU_Top.hw/backup/hw_ila_data_1.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+set_property TRIGGER_COMPARE_VALUE eq32'u1 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2022-Jun-25 10:38:23
+wait_on_hw_ila -timeout 0 [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+INFO: [Labtools 27-1965] The ILA core 'hw_ila_1' trigger was stopped by user at 2022-Jun-25 10:38:41
+WARNING: [Labtools 27-157] hw_ila [hw_ila_1] stopped. No data to upload.
+reset_run impl_1 -prev_step 
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+[Sat Jun 25 10:47:22 2022] Launched impl_1...
+Run output will be captured here: G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/runme.log
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Digilent/210251A08870
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210251A08870
+INFO: [Labtools 27-1434] Device xc7k325t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+WARNING: [Labtools 27-3361] The debug hub core was not detected.
+Resolution: 
+1. Make sure the clock connected to the debug hub (dbg_hub) core is a free running clock and is active.
+2. Make sure the BSCAN_SWITCH_USER_MASK device property in Vivado Hardware Manager reflects the user scan chain setting in the design and refresh the device.  To determine the user scan chain setting in the design, open the implemented design and use 'get_property C_USER_SCAN_CHAIN [get_debug_cores dbg_hub]'.
+For more details on setting the scan chain property, consult the Vivado Debug and Programming User Guide (UG908).
+WARNING: [Labtools 27-3413] Dropping logic core with cellname:'u_ila_0' at location 'uuid_23E7D65A79BC59F7BC47406C1714DFAE' from probes file, since it cannot be found on the programmed device.
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+set_property PROBES.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.ltx} [get_hw_devices xc7k325t_0]
+set_property FULL_PROBES.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.ltx} [get_hw_devices xc7k325t_0]
+set_property PROGRAM.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.bit} [get_hw_devices xc7k325t_0]
+program_hw_devices [get_hw_devices xc7k325t_0]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+program_hw_devices: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2787.004 ; gain = 0.000
+refresh_hw_device [lindex [get_hw_devices xc7k325t_0] 0]
+INFO: [Labtools 27-2302] Device xc7k325t (JTAG device index = 0) is programmed with a design that has 1 ILA core(s).
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+set_property TRIGGER_COMPARE_VALUE eq32'u255 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2022-Jun-25 10:50:21
+set_property TRIGGER_COMPARE_VALUE eq32'u0 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+wait_on_hw_ila -timeout 0 [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+INFO: [Labtools 27-1965] The ILA core 'hw_ila_1' trigger was stopped by user at 2022-Jun-25 10:50:37
+WARNING: [Labtools 27-157] hw_ila [hw_ila_1] stopped. No data to upload.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2022-Jun-25 10:50:37
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2022-Jun-25 10:50:37
+INFO: [Labtools 27-3304] ILA Waveform data saved to file G:/verilog project/CPU_Top/CPU_Top/CPU_Top.hw/backup/hw_ila_data_1.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Digilent/210251A08870
+exit
+INFO: [Common 17-206] Exiting Vivado at Sat Jun 25 10:54:18 2022...

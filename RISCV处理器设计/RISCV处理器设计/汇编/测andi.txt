@@ -1,0 +1,7 @@
+addi x1,x0,0x01
+slli x1,x1,31  
+addi x2,x0,0x0a 
+loop:
+andi x4,x2,10
+sw x4,0(x1) 
+jal x0,loop

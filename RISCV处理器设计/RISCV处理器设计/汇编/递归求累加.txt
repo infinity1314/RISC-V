@@ -1,0 +1,28 @@
+addi x8,x0,0x01
+slli x8,x8,31  （在x8内放入地址8000_0000）
+addi x1,x0,200
+addi x5,x0,5
+addi sp,x0,200
+main:
+addi x5,x0,5 （求1+2+3+4+5=15）
+addi x6,x0,1
+addi x7,x0,0
+jal x1,fact
+addi x1,x0,250
+sw x7,0(x8)
+jal x0,main   （反复执行有利于抓取结果）
+fact:     （将计算所需数据压栈）
+ blt x5,x6,return
+ sw x1,0(sp)
+ addi sp,sp,-4
+ sw x5,0(sp)
+ addi sp,sp,-4
+ addi x5,x5,-1
+ jal x1,fact
+return:  （将数据弹栈并进行累加计算）
+ addi sp,sp,4
+ lw x5,0(sp)
+ addi sp,sp,4
+ lw x1,0(sp)
+ add x7,x7,x5
+jalr x0,x1,0

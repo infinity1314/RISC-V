@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Thu Jun 16 10:52:46 2022
+# Process ID: 14120
+# Current directory: G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/PLL_synth_1
+# Command line: vivado.exe -log PLL.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source PLL.tcl
+# Log file: G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/PLL_synth_1/PLL.vds
+# Journal file: G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/PLL_synth_1\vivado.jou
+#-----------------------------------------------------------
+source PLL.tcl -notrace

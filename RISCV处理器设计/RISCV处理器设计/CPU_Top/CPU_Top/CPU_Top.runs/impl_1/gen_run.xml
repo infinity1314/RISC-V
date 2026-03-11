@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7k325tffg676-2" LaunchTime="1656236233">
+  <File Type="BITSTR-BMM" Name="CPU_Top_bd.bmm"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="CPU_Top_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="CPU_Top_timing_summary_init.rpt"/>
+  <File Type="ROUTE-PWR" Name="CPU_Top_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="CPU_Top.tcl"/>
+  <File Type="OPT-TIMING" Name="CPU_Top_timing_summary_opted.rpt"/>
+  <File Type="OPT-DCP" Name="CPU_Top_opt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="CPU_Top_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="CPU_Top_reports.tcl"/>
+  <File Type="OPT-DRC" Name="CPU_Top_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="CPU_Top.hwdef"/>
+  <File Type="PWROPT-DCP" Name="CPU_Top_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="CPU_Top_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="CPU_Top_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="CPU_Top_placed.dcp"/>
+  <File Type="PLACE-IO" Name="CPU_Top_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="CPU_Top_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="CPU_Top_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="CPU_Top_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="CPU_Top_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="CPU_Top_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="CPU_Top_incremental_reuse_pre_placed.rpt"/>
+  <File Type="BG-BGN" Name="CPU_Top.bgn"/>
+  <File Type="PLACE-TIMING" Name="CPU_Top_timing_summary_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="CPU_Top_postplace_pwropt.dcp"/>
+  <File Type="BG-BIN" Name="CPU_Top.bin"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="CPU_Top_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="CPU_Top_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="CPU_Top_drc_physopted.rpt"/>
+  <File Type="BITSTR-MSK" Name="CPU_Top.msk"/>
+  <File Type="PHYSOPT-TIMING" Name="CPU_Top_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="CPU_Top_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="CPU_Top_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="CPU_Top_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="CPU_Top_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="CPU_Top_drc_routed.pb"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
+  <File Type="BITSTR-LTX" Name="CPU_Top.ltx"/>
+  <File Type="ROUTE-DRC-RPX" Name="CPU_Top_drc_routed.rpx"/>
+  <File Type="BITSTR-MMI" Name="CPU_Top.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="CPU_Top_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="CPU_Top_methodology_drc_routed.rpx"/>
+  <File Type="BITSTR-SYSDEF" Name="CPU_Top.sysdef"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="CPU_Top_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="CPU_Top_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="CPU_Top_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="CPU_Top_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="CPU_Top_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="CPU_Top_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="CPU_Top_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="CPU_Top_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="CPU_Top_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="CPU_Top_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="CPU_Top_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="CPU_Top_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="CPU_Top_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="CPU_Top_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="CPU_Top_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="CPU_Top_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="CPU_Top_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="CPU_Top_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="CPU_Top_bus_skew_postroute_physopted.pb"/>
+  <File Type="BG-BIT" Name="CPU_Top.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="CPU_Top_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BITSTR-RBT" Name="CPU_Top.rbt"/>
+  <File Type="BITSTR-NKY" Name="CPU_Top.nky"/>
+  <File Type="BG-DRC" Name="CPU_Top.drc"/>
+  <File Type="RDI-RDI" Name="CPU_Top.vdi"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/ALU.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../ALU.v"/>
+        <Attr Name="ImportTime" Val="1625034655"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/ALUctrl.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../ALUctrl.v"/>
+        <Attr Name="ImportTime" Val="1620543467"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/Cache.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Cache.v"/>
+        <Attr Name="ImportTime" Val="1625035053"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/Cacheblock.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Cacheblock.v"/>
+        <Attr Name="ImportTime" Val="1624068793"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/Control.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Control.v"/>
+        <Attr Name="ImportTime" Val="1624071603"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/Count.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Count.v"/>
+        <Attr Name="ImportTime" Val="1623819088"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/EXMEMReg.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../EXMEMReg.v"/>
+        <Attr Name="ImportTime" Val="1625034880"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/ForwardingUnit.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../ForwardingUnit.v"/>
+        <Attr Name="ImportTime" Val="1620729801"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/HazardDetectionUnit.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../HazardDetectionUnit.v"/>
+        <Attr Name="ImportTime" Val="1620642897"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/IDEXReg.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../IDEXReg.v"/>
+        <Attr Name="ImportTime" Val="1625034779"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/IFIDReg.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../IFIDReg.v"/>
+        <Attr Name="ImportTime" Val="1620572900"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/MEMWBReg.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../MEMWBReg.v"/>
+        <Attr Name="ImportTime" Val="1625035019"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/PC.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../PC.v"/>
+        <Attr Name="ImportTime" Val="1620294963"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/add32.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../add32.v"/>
+        <Attr Name="ImportTime" Val="1618803804"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/cpuLSX.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../cpuLSX.v"/>
+        <Attr Name="ImportTime" Val="1625041710"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/immGen.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../immGen.v"/>
+        <Attr Name="ImportTime" Val="1618803730"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/mux.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../mux.v"/>
+        <Attr Name="ImportTime" Val="1620463777"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/ram_data.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../ram_data.v"/>
+        <Attr Name="ImportTime" Val="1625020751"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/ram_ins.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../ram_ins.v"/>
+        <Attr Name="ImportTime" Val="1652932212"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/ram_res.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../ram_res.v"/>
+        <Attr Name="ImportTime" Val="1652874590"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/shumaguan/seg_led.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../shumaguan/seg_led.v"/>
+        <Attr Name="ImportTime" Val="1655986525"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/shiftleft1.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../shiftleft1.v"/>
+        <Attr Name="ImportTime" Val="1618297162"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/CPU_Top/CPU_Top.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../CPU_Top.v"/>
+        <Attr Name="ImportTime" Val="1625384831"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="CPU_Top"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PSRCDIR/constrs_1/new/1111.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="TargetConstrsFile" Val="$PSRCDIR/constrs_1/new/1111.xdc"/>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019"/>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+  </Strategy>
+</GenRun>

@@ -1,0 +1,89 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Sat Jun 25 10:06:22 2022
+# Process ID: 15092
+# Current directory: G:/verilog project/CPU_Top/CPU_Top
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent2576 G:\verilog project\CPU_Top\CPU_Top\CPU_Top.xpr
+# Log file: G:/verilog project/CPU_Top/CPU_Top/vivado.log
+# Journal file: G:/verilog project/CPU_Top/CPU_Top\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.xpr}
+update_compile_order -fileset sources_1
+open_hw
+connect_hw_server
+open_hw_target
+set_property PROGRAM.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.bit} [get_hw_devices xc7k325t_0]
+current_hw_device [get_hw_devices xc7k325t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7k325t_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7k325t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7k325t_0]
+set_property PROGRAM.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.bit} [get_hw_devices xc7k325t_0]
+program_hw_devices [get_hw_devices xc7k325t_0]
+refresh_hw_device [lindex [get_hw_devices xc7k325t_0] 0]
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+open_run synth_1 -name synth_1
+create_debug_core u_ila_0 ila
+set_property C_DATA_DEPTH 1024 [get_debug_cores u_ila_0]
+set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
+set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
+set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
+set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
+set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
+startgroup 
+set_property C_EN_STRG_QUAL true [get_debug_cores u_ila_0 ]
+set_property C_ADV_TRIGGER true [get_debug_cores u_ila_0 ]
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0 ]
+set_property ALL_PROBE_SAME_MU_CNT 4 [get_debug_cores u_ila_0 ]
+endgroup
+connect_debug_port u_ila_0/clk [get_nets [list clk_50M_IBUF_BUFG ]]
+set_property port_width 32 [get_debug_ports u_ila_0/probe0]
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
+connect_debug_port u_ila_0/probe0 [get_nets [list {Data_Mem_WriteData[0]} {Data_Mem_WriteData[1]} {Data_Mem_WriteData[2]} {Data_Mem_WriteData[3]} {Data_Mem_WriteData[4]} {Data_Mem_WriteData[5]} {Data_Mem_WriteData[6]} {Data_Mem_WriteData[7]} {Data_Mem_WriteData[8]} {Data_Mem_WriteData[9]} {Data_Mem_WriteData[10]} {Data_Mem_WriteData[11]} {Data_Mem_WriteData[12]} {Data_Mem_WriteData[13]} {Data_Mem_WriteData[14]} {Data_Mem_WriteData[15]} {Data_Mem_WriteData[16]} {Data_Mem_WriteData[17]} {Data_Mem_WriteData[18]} {Data_Mem_WriteData[19]} {Data_Mem_WriteData[20]} {Data_Mem_WriteData[21]} {Data_Mem_WriteData[22]} {Data_Mem_WriteData[23]} {Data_Mem_WriteData[24]} {Data_Mem_WriteData[25]} {Data_Mem_WriteData[26]} {Data_Mem_WriteData[27]} {Data_Mem_WriteData[28]} {Data_Mem_WriteData[29]} {Data_Mem_WriteData[30]} {Data_Mem_WriteData[31]} ]]
+save_constraints
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+set_property PROBES.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.ltx} [get_hw_devices xc7k325t_0]
+set_property FULL_PROBES.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.ltx} [get_hw_devices xc7k325t_0]
+set_property PROGRAM.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.bit} [get_hw_devices xc7k325t_0]
+program_hw_devices [get_hw_devices xc7k325t_0]
+refresh_hw_device [lindex [get_hw_devices xc7k325t_0] 0]
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+set_property TRIGGER_COMPARE_VALUE eq32'u0 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+set_property TRIGGER_COMPARE_VALUE eq32'u120 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+wait_on_hw_ila -timeout 0 [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+set_property TRIGGER_COMPARE_VALUE eq32'b0000_0000_0000_0000_0000_0000_0111_1000 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+set_property TRIGGER_COMPARE_VALUE eq32'u120 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+set_property TRIGGER_COMPARE_VALUE eq32'u0 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+set_property TRIGGER_COMPARE_VALUE eq32'u1 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+wait_on_hw_ila -timeout 0 [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+reset_run impl_1 -prev_step 
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+set_property PROBES.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.ltx} [get_hw_devices xc7k325t_0]
+set_property FULL_PROBES.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.ltx} [get_hw_devices xc7k325t_0]
+set_property PROGRAM.FILE {G:/verilog project/CPU_Top/CPU_Top/CPU_Top.runs/impl_1/CPU_Top.bit} [get_hw_devices xc7k325t_0]
+program_hw_devices [get_hw_devices xc7k325t_0]
+refresh_hw_device [lindex [get_hw_devices xc7k325t_0] 0]
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+set_property TRIGGER_COMPARE_VALUE eq32'u255 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+set_property TRIGGER_COMPARE_VALUE eq32'u0 [get_hw_probes Data_Mem_WriteData -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
+wait_on_hw_ila -timeout 0 [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7k325t_0] -filter {CELL_NAME=~"u_ila_0"}]]
