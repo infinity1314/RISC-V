@@ -25,19 +25,28 @@
 
 module ID (
 	input wire					rst,
-	input wire[`InstAddrBus]	pc_i,
-	input wire[`InstBus]		inst_i,
+	input wire[`InstAddrBus]	id_pc_i,
+	input wire[`InstBus]		id_inst_i,
 
 	// Read data from regfile
 	input wire[`RegBus]		 	r1_data_i,
 	input wire[`RegBus]		 	r2_data_i,
-
+    //输出：r1_enable_o，寄存器1读使能
+    //输出：r2_enable_o，寄存器2读使能
+    //输出：r1_addr_o，寄存器1读地址
+    //输出：r2_addr_o，寄存器2读地址
 	output reg					r1_enable_o, // Enable read1 to regfile
 	output reg					r2_enable_o, // Enable read2 to regfile
 	output reg[`RegAddrBus]	 	r1_addr_o,
 	output reg[`RegAddrBus]	 	r2_addr_o,
 
 	// ifo. for EXE
+	//输出：aluop_o，ALU操作码
+	//输出：alusel_o，ALU选择器
+	//输出：r1_data_o，寄存器1数据
+	//输出：r2_data_o，寄存器2数据
+	//输出：w_enable_o，写使能
+	//输出：w_addr_o，写地址
 	output reg[`AluOpBus]		aluop_o,
 	output reg[`AluOutSelBus]	alusel_o,
 	output reg[`RegBus]		 	r1_data_o,
@@ -46,6 +55,10 @@ module ID (
 	output reg[`RegAddrBus]	 	w_addr_o,
 
 	// Forwarding from ex
+	//输入：ex_pre_ld，ex模块传来的预加载
+	//输入：ex_w_enable_i，ex模块写使能
+	//输入：ex_w_addr_i，ex模块写地址
+	//输入：ex_w_data_i，ex模块写数据
 	input wire					ex_pre_ld,
 	input wire 					ex_w_enable_i,
 	input wire[`RegAddrBus]		ex_w_addr_i,
@@ -67,11 +80,16 @@ module ID (
 	output reg[`InstAddrBus]	j_target_addr_o
 	
 	// For load and store
+	//输出：imm_o，立即数
+	output reg[`RegBus]			imm_o,
+	output reg					instvalid_o,
 );
 
 //ID模块内部寄存器
 reg instvalid;
 reg[`RegBus] imm;
+//输出：r1_stall_req，寄存器1 stall请求
+//输出：r2_stall_req，寄存器2 stall请求
 reg r1_stall_req;
 reg r2_stall_req;
 
@@ -90,23 +108,23 @@ wire[31:0]	 	imm_U;
 wire[31:0]		imm_J;
 
 
-assign opcode		=	inst_i[6:0];
-assign rd			=	inst_i[11:7];
-assign funct3		=	inst_i[14:12];
-assign rs1			=	inst_i[19:15];
-assign rs2			=	inst_i[24:20];
-assign funct7		=	inst_i[30];
-assign imm_I		=	inst_i[31:20];
-assign imm_S		=	{inst_i[31:25], inst_i[11:7]};
-assign imm_B		=	{{20{inst_i[31]}}, inst_i[7], 
-							inst_i[30:25], inst_i[11:8],1'h0};
-assign imm_U		=	{inst_i[31:12], 12'h0};
-assign imm_J		=	{{12{inst_i[31]}}, inst_i[19:12],
-							inst_i[20], inst_i[30:21],1'h0};
+assign opcode		=	id_inst_i[6:0];
+assign rd			=	id_inst_i[11:7];
+assign funct3		=	id_inst_i[14:12];
+assign rs1			=	id_inst_i[19:15];
+assign rs2			=	id_inst_i[24:20];
+assign funct7		=	id_inst_i[30];
+assign imm_I		=	id_inst_i[31:20];
+assign imm_S		=	{id_inst_i[31:25], id_inst_i[11:7]};
+assign imm_B		=	{{20{id_inst_i[31]}}, id_inst_i[7], 
+							id_inst_i[30:25], id_inst_i[11:8],1'h0};
+assign imm_U		=	{id_inst_i[31:12], 12'h0};
+assign imm_J		=	{{12{id_inst_i[31]}}, id_inst_i[19:12],
+							id_inst_i[20], id_inst_i[30:21],1'h0};
 
 wire[`InstAddrBus]	b_target_res;
 //计算分支目标地址
-assign b_target_res = ((opcode == `OP_JAL)? imm_J + pc_i: imm_B + pc_i);
+assign b_target_res = ((opcode == `OP_JAL)? imm_J + id_pc_i: imm_B + id_pc_i);
 
 `ifdef ID_BRANCHES
 // This part may cause lower speed
@@ -186,7 +204,7 @@ begin
 		default:
 		begin
 			flush_flag_o		=	1'b0;
-			j_target_addr_o	=	`Zero;
+			j_target_addr_o		=	`Zero;
 		end
 	endcase
 end
@@ -206,14 +224,11 @@ begin
 		w_enable_o		= 	`WriteDisable;
 		w_addr_o		= 	`NOPRegAddr;
 		instvalid		=	`InstValid;
-		imm 			=	`Zero;
-
-				
+		imm 			=	`Zero;		
 	end
-
 	else
 	begin
-		pc_o			=	pc_i;
+		pc_o			=	id_pc_i;
 		case(opcode)
 			`OP_LUI:
 			begin
@@ -226,11 +241,8 @@ begin
 				imm				=	imm_U;
 				w_enable_o		=	`WriteEnable;
 				w_addr_o		=	rd;
-				instvalid		=	`InstValid;
-
-								
+				instvalid		=	`InstValid;			
 			end
-
 			`OP_AUIPC:
 			begin
 				aluop_o			=	`EX_AUIPC_OP;
@@ -243,9 +255,7 @@ begin
 				w_enable_o		=	`WriteEnable;
 				w_addr_o		=	rd;
 				instvalid		=	`InstValid;
-
 			end
-
 			`OP_JAL:
 			begin
 				aluop_o			=	`EX_JAL_OP;

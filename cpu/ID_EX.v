@@ -1,3 +1,24 @@
+//ID_EX模块，负责将ID模块传来的指令和PC地址传到EX模块
+//输入：clk，时钟信号
+//输入：rst，复位信号
+//输入：id_pc，ID模块传来的PC地址
+//输入：id_aluop_o，ID模块传来的ALU操作码
+//输入：id_alusel_o，ID模块传来的ALU选择器
+//输入：id_r1_data_o，ID模块传来的寄存器1数据
+//输入：id_r2_data_o，ID模块传来的寄存器2数据
+//输入：id_w_enable_o，ID模块传来的写使能
+//输入：id_w_addr_o，ID模块传来的写地址
+
+//输出：ex_aluop_i，EX模块要传入的ALU操作码
+//输出：ex_alusel_i，EX模块要传入的ALU选择器
+//输出：ex_r1_data_i，EX模块要传入的寄存器1数据
+//输出：ex_r2_data_i，EX模块要传入的寄存器2数据
+//输出：ex_w_enable_i，EX模块要传入的写使能
+//输出：ex_w_addr_i，EX模块要传入的写地址
+//输出：ex_pc_i，EX模块要传入的PC地址
+//输出：ex_offset_i，EX模块要传入的偏移量
+//输入：ex_b_flag_i，EX模块传来的分支标志
+//输入：ex_w_b_target_addr_o，EX模块传来的分支目标地址
 `ifndef _ID_EX
 `define _ID_EX
 `include "Defines.vh"
