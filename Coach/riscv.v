@@ -19,6 +19,8 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+`include "instruction_def.v"
+
 module riscv(clk, rst);
     input clk, rst;
 
@@ -41,6 +43,9 @@ module riscv(clk, rst);
     wire [31:0] WD;
     wire [31:0] RD1, RD1_r, RD2, RD2_r;
     wire [31:0] A, B, ALU_result, ALU_result_r;
+    // JALR：目标 = (rs1 + sign_ext(imm12)) & ~1，与 RV32I 一致；送入 NPC.rs
+    wire [31:0] jalr_target;
+    assign jalr_target = (RD1 + {{20{Imm12[11]}}, Imm12}) & 32'hFFFFFFFE;
 
     // 指令字段解析
     assign opcode   = out_ins[6:0];
@@ -56,7 +61,14 @@ module riscv(clk, rst);
     assign Offset = (opcode == `INSTR_BTYPE_OP ) ? {out_ins[31], out_ins[7], out_ins[30:25], out_ins[11:8]} :
                     (opcode == `INSTR_SW_OP    ) ? {out_ins[31:25], out_ins[11:7]} : Imm12;
 
-    // 模块例化
+    // 指令存储器（PC 字寻址映射到 IM 的 [11:2]）
+    wire [11:2] im_addr;
+    assign im_addr = PC[13:2];
+    IM U_IM (
+        .InsMemRW(InsMemRW),
+        .addr   (im_addr),
+        .Ins    (in_ins)
+    );
 
     // 控制单元
     ControlUnit U_ControlUnit(
@@ -73,7 +85,8 @@ module riscv(clk, rst);
 
     // 下一跳地址计算 NPC
     NPC U_NPC (
-        .PC(PC), .NPCOp(NPCOp), .Offset12(Offset), .Offset20(Offset20), .rs(RD1[31:2]), .PCA4(PCA4), .NPC(NPC)
+        .PC(PC), .NPCOp(NPCOp), .Offset12(Offset), .Offset20(Offset20),
+        .rs(jalr_target), .PCA4(PCA4), .NPC(NPC)
     );
 
     // 指令寄存器 IR

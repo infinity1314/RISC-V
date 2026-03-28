@@ -1,3 +1,5 @@
+`include "ctrl_signal_def.v"
+
 module MUX_3to1_B(X, Y, Z, control, out);
     input  [31:0] X;       // 来自寄存器堆的数据 RD2
     input  [31:0] Y;       // 来自 EXT 的 32 位扩展立即数 Imm32
