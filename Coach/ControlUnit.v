@@ -1,116 +1,110 @@
 `timescale 1ns / 1ps
+
 `include "ctrl_signal_def.v"
 `include "instruction_def.v"
 
 module ControlUnit(
-    input rst, clk, zero,
+    input rst,
+    input clk,
+    input zero,            // 在流水线中，分支判断通常提前到 ID 阶段
     input [6:0] opcode,
     input [6:0] Funct7,
     input [2:0] Funct3,
-    output reg PCWrite, InsMemRW, IRWrite, RFWrite, DMCtrl, ExtSel, ALUSrcA,
-    output reg [1:0] ALUSrcB, RegSel, NPCOp, WDSel,
-    output reg [3:0] ALUOp
+    output reg PCWrite,    // 用于处理流水线冒险时的暂停 (Stall)
+    output reg InsMemRW,   // 指令存储器读写 (通常恒为读)
+    output reg IRWrite,    // 流水线中通常对应 IF/ID 寄存器的使能
+    output reg RFWrite,    // 是否写回寄存器堆 (最终传到 WB 阶段)
+    output reg DMCtrl,     // 数据存储器读写 (1:写, 0:读，传到 MEM 阶段)
+    output reg ExtSel,     // 立即数扩展方式
+    output reg ALUSrcA,    // ALU A端来源 (0:RD1, 1:SA/PC)
+    output reg [1:0] ALUSrcB, // ALU B端来源 (0:RD2, 1:Imm, 2:Offset)
+    output reg [1:0] RegSel,  // 写回目标选择 (rd/rt/x31)
+    output reg [1:0] NPCOp,   // 下一跳地址选择
+    output reg [1:0] WDSel,   // 写回数据来源 (ALU/MEM/PC+4)
+    output reg [3:0] ALUOp    // ALU 运算类型控制
 );
 
-    // 状态定义（多周期 CPU 典型状态）
-    parameter IF  = 3'b000; // 取指 (Instruction Fetch)
-    parameter ID  = 3'b001; // 译码 (Instruction Decode)
-    parameter EX  = 3'b010; // 执行 (Execute)
-    parameter MEM = 3'b011; // 访存 (Memory Access)
-    parameter WB  = 3'b100; // 写回 (Write Back)
-
-    reg [2:0] curr_state, next_state;
-
-    // 第一段：状态跳转逻辑
-    always @(posedge clk or posedge rst) begin
-        if (rst) curr_state <= IF;
-        else     curr_state <= next_state;
-    end
-
-    // 第二段：状态机转换逻辑
     always @(*) begin
-        case(curr_state)
-            IF:  next_state = ID;
-            ID:  next_state = EX;
-            EX:  begin
-                if (opcode == `INSTR_ITYPE_L_OP || opcode == `INSTR_STYPE_OP) 
-                    next_state = MEM; // Load/Store 指令需要经过 MEM
-                else if (opcode == `INSTR_BTYPE_OP || opcode == `INSTR_JAL_OP || opcode == `INSTR_JALR_OP)
-                    next_state = IF;  // 分支和跳转执行完直接回 IF
-                else
-                    next_state = WB;  // R型/I型算术指令进入 WB
-            end
-            MEM: begin
-                if (opcode == `INSTR_ITYPE_L_OP) next_state = WB; // Load 指令需要 WB
-                else                             next_state = IF; // Store 执行完回 IF
-            end
-            WB:  next_state = IF;
-            default: next_state = IF;
-        endcase
-    end
+        // --- 默认信号设置（避免产生锁存器） ---
+        PCWrite  = 1'b1;   // 默认 PC 始终更新
+        InsMemRW = 1'b1;   // 默认读指令
+        IRWrite  = 1'b1;   // 默认流水线寄存器流动
+        RFWrite  = 1'b0;
+        DMCtrl   = `DMCtrl_RD;
+        ExtSel   = `ExtSel_SIGNED;
+        ALUSrcA  = `ALUSrcA_A;
+        ALUSrcB  = `ALUSrcB_B;
+        RegSel   = `RegSel_rd;
+        NPCOp    = `NPC_PC;
+        WDSel    = `WDSel_FromALU;
+        ALUOp    = `ALUOp_ADD;
 
-    // 第三段：控制信号组合逻辑输出
-    always @(*) begin
-        // 默认值设置（防止产生锁存器 Latch）
-        PCWrite = 0; InsMemRW = 0; IRWrite = 0; RFWrite = 0; 
-        DMCtrl = 0; ExtSel = 0; ALUSrcA = 0;
-        ALUSrcB = 2'b00; RegSel = 2'b00; NPCOp = `NPC_PC;
-        WDSel = 2'b00; ALUOp = 4'b0000;
-
-        case(curr_state)
-            IF: begin
-                InsMemRW = 1;
-                IRWrite  = 1;
-                PCWrite  = 1;
-                NPCOp    = `NPC_PC; // PC = PC + 4
-            end
-
-            ID: begin
-                // 预取立即数或分支地址计算
-                ExtSel = (opcode == `INSTR_ITYPE_L_OP || opcode == `INSTR_ITYPE_A_OP) ? `ExtSel_SIGNED : `ExtSel_ZERO;
-            end
-
-            EX: begin
-                // ALU 操作数 A 选择
-                ALUSrcA = (opcode == `INSTR_JAL_OP || opcode == `INSTR_JALR_OP) ? 1 : 0;
-                
-                // ALU 操作数 B 选择
-                if (opcode == `INSTR_RTYPE_OP) ALUSrcB = 2'b00; // 来自寄存器
-                else                           ALUSrcB = 2'b01; // 来自立即数
-
-                // ALUOp 计算逻辑（根据 Funct3/Funct7）
-                case(opcode)
-                    `INSTR_RTYPE_OP: begin
-                        if (Funct3 == 3'b000) ALUOp = (Funct7[5]) ? `ALU_SUB : `ALU_ADD;
-                        else if (Funct3 == 3'b111) ALUOp = `ALU_AND;
-                        else if (Funct3 == 3'b110) ALUOp = `ALU_OR;
-                        // ... 其他 R 型指令逻辑
-                    end
-                    `INSTR_ITYPE_A_OP: ALUOp = `ALU_ADD; // addi
-                    `INSTR_BTYPE_OP:   ALUOp = `ALU_SUB; // 用于比较
-                    default:           ALUOp = `ALU_ADD;
+        case(opcode)
+            // R-Type 指令 (add, sub, and, or, slt, etc.)
+            `INSTR_RTYPE_OP: begin
+                RFWrite = 1'b1;
+                ALUSrcB = `ALUSrcB_B;
+                WDSel   = `WDSel_FromALU;
+                case(Funct3)
+                    3'b000: ALUOp = (Funct7[5]) ? `ALUOp_SUB : `ALUOp_ADD;
+                    3'b111: ALUOp = `ALUOp_AND;
+                    3'b110: ALUOp = `ALUOp_OR;
+                    3'b100: ALUOp = `ALUOp_XOR;
+                    3'b001: ALUOp = `ALUOp_SLL;
+                    3'b101: ALUOp = (Funct7[5]) ? `ALUOp_SRA : `ALUOp_SRL;
+                    default: ALUOp = `ALUOp_ADD;
                 endcase
-
-                // 分支/跳转处理
-                if (opcode == `INSTR_BTYPE_OP) begin
-                    NPCOp = (zero) ? `NPC_OFFSET12 : `NPC_PC;
-                    PCWrite = 1;
-                end else if (opcode == `INSTR_JAL_OP) begin
-                    NPCOp = `NPC_OFFSET20;
-                    PCWrite = 1;
-                end
             end
 
-            MEM: begin
-                if (opcode == `INSTR_ITYPE_L_OP) DMCtrl = 0; // Read
-                else                             DMCtrl = 1; // Store (Write)
+            // I-Type 算术指令 (addi, ori, etc.)
+            `INSTR_ITYPE_OP: begin
+                RFWrite = 1'b1;
+                ALUSrcB = `ALUSrcB_Imm;
+                WDSel   = `WDSel_FromALU;
+                case(Funct3)
+                    3'b000: ALUOp = `ALUOp_ADD; // addi
+                    3'b110: begin 
+                        ALUOp = `ALUOp_OR;   // ori
+                        ExtSel = `ExtSel_ZERO;
+                    end
+                    default: ALUOp = `ALUOp_ADD;
+                endcase
             end
 
-            WB: begin
-                RFWrite = 1;
-                RegSel  = `RegSel_rd;
-                WDSel   = (opcode == `INSTR_ITYPE_L_OP) ? 2'b01 : 2'b00; // Load 数据还是 ALU 结果
+            // I-Type Load 指令 (lw)
+            `INSTR_LW_OP: begin
+                RFWrite = 1'b1;
+                ALUSrcB = `ALUSrcB_Imm;
+                DMCtrl  = `DMCtrl_RD;
+                WDSel   = `WDSel_FromMEM;
+                ALUOp   = `ALUOp_ADD;
             end
+
+            // S-Type Store 指令 (sw)
+            `INSTR_SW_OP: begin
+                RFWrite = 1'b0;
+                ALUSrcB = `ALUSrcB_Imm;
+                DMCtrl  = `DMCtrl_WR;
+                ALUOp   = `ALUOp_ADD;
+            end
+
+            // B-Type 分支指令 (beq, bne)
+            `INSTR_BTYPE_OP: begin
+                ALUSrcB = `ALUSrcB_B;
+                ALUOp   = `ALUOp_BR;   // 使用专门的分支比较逻辑
+                NPCOp   = (zero) ? `NPC_Offset12 : `NPC_PC;
+                // 流水线中通常需要在此处清空 (Flush) 已经取错的指令
+            end
+
+            // J-Type 跳转指令 (jal)
+            `INSTR_JAL_OP: begin
+                RFWrite = 1'b1;
+                RegSel  = `RegSel_31;  // 返回地址存入 x31
+                WDSel   = `WDSel_FromPC;
+                NPCOp   = `NPC_Offset20;
+            end
+
+            default: ;
         endcase
     end
 
