@@ -33,9 +33,12 @@ module riscv(clk, rst);
     wire [2:0] Funct3;
     wire [6:0] Funct7;
     wire [31:0] PC, NPC, PCA4;
+    wire [29:0] PCA4_hi;   // PC+4[31:2]，与 MUX_3to1_LMD.Z 位宽一致
     wire [31:0] in_ins, out_ins, RD, DR_out;
     wire [4:0] rs1, rs2, rd;
     wire [11:0] Imm12;
+    wire [11:0] SImm12;
+    wire [11:0] ImmForExt;
     wire [31:0] Imm32;
     wire [20:1] Offset20;
     wire [11:0] Offset;
@@ -46,6 +49,7 @@ module riscv(clk, rst);
     // JALR：目标 = (rs1 + sign_ext(imm12)) & ~1，与 RV32I 一致；送入 NPC.rs
     wire [31:0] jalr_target;
     assign jalr_target = (RD1 + {{20{Imm12[11]}}, Imm12}) & 32'hFFFFFFFE;
+    assign PCA4_hi     = PCA4[31:2];
 
     // 指令字段解析
     assign opcode   = out_ins[6:0];
@@ -55,11 +59,13 @@ module riscv(clk, rst);
     assign rs2      = out_ins[24:20];
     assign rd       = out_ins[11:7];
     assign Imm12    = out_ins[31:20];
+    assign SImm12   = {out_ins[31:25], out_ins[11:7]};
     assign Offset20 = {out_ins[31], out_ins[19:12], out_ins[20], out_ins[30:21]};
     
     // 立即数/偏移量选择逻辑
-    assign Offset = (opcode == `INSTR_BTYPE_OP ) ? {out_ins[31], out_ins[7], out_ins[30:25], out_ins[11:8]} :
-                    (opcode == `INSTR_SW_OP    ) ? {out_ins[31:25], out_ins[11:7]} : Imm12;
+    assign Offset = (opcode == `INSTR_BTYPE_OP ) ? {out_ins[31], out_ins[7], out_ins[30:25], out_ins[11:8]} : Imm12;
+    // 给 EXT 的 12 位输入：SW 用 S-type，其余 I-type（如 addi/ori/lw/jalr）
+    assign ImmForExt = (opcode == `INSTR_SW_OP) ? SImm12 : Imm12;
 
     // 指令存储器：与赛方 IM(addr[11:2])、1024 字深度一致，用 PC[11:2] 字索引
     IM U_IM (
@@ -106,7 +112,7 @@ module riscv(clk, rst);
 
     // 写回数据选择 Mux（须用 MUX_3to1_LMD：Z 为 PCA4[31:2] 与模块定义一致）
     MUX_3to1_LMD U_MUX_3to1_LMD (
-        .X(ALU_result_r), .Y(DR_out), .Z(PCA4[31:2]),
+        .X(ALU_result_r), .Y(DR_out), .Z(PCA4_hi),
         .control(WDSel), .out(WD)
     );
 
@@ -122,12 +128,13 @@ module riscv(clk, rst);
 
     // 立即数扩展
     EXT U_EXT (
-        .imm_in(Imm12), .ExtSel(ExtSel), .imm_out(Imm32)
+        .imm_in(ImmForExt), .ExtSel(ExtSel), .imm_out(Imm32)
     );
 
     // ALU 输入 A 选择 Mux
+    wire [4:0] shamt_rs1 = 5'd0;
     MUX_2to1_A U_MUX_2to1_A (
-        .X(RD1_r), .Y(5'd0), .control(ALUSrcA), .out(A)
+        .X(RD1_r), .Y(shamt_rs1), .control(ALUSrcA), .out(A)
     );
 
     // ALU 输入 B 选择 Mux

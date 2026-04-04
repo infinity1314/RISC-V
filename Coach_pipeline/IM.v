@@ -1,4 +1,5 @@
 `timescale 1ns / 1ps
+`include "ctrl_signal_def.v"
 
 module IM(InsMemRW, addr, Ins);
     input         InsMemRW; // 指令存储器读使能信号

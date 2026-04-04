@@ -1,14 +1,14 @@
 `include "Defines.vh"
 `include "ALUInstDef.vh"
 
-// 五级流水线顶层：内建 IM（与 Coach 多周期一致），无 I-Cache / 分支预测。
-// 分支与跳转在 EX 阶段判定；next_pc =  taken ? target : pc+4 。
-module cpu_top(
+// 五级流水线顶层（在 Coach 工程内与 riscv.v 多周期并存）。
+// 复用上级目录的 IM.v（与 Coach 多周期相同接口）；数据通路为 pipeline/ 内各段 + pl_regfile + dmem。
+// 分支在 EX 判定：next_pc = taken ? target : pc+4 。
+module riscv_pipeline (
     input wire clk,
     input wire reset
 );
 
-    // PC：与 Coach/PC.v 一致，复位到指令区起始
     localparam [31:0] PC_RESET = 32'h0000_2000;
 
     reg [`InstAddrBus] pc;
@@ -75,7 +75,6 @@ module cpu_top(
     wire                 if_stall_req;
     wire [`InstBus]      im_inst;
 
-    // 内建指令存储器（字地址 = PC[11:2]）
     IM u_im (
         .InsMemRW (1'b1),
         .addr     (pc[11:2]),
@@ -102,7 +101,7 @@ module cpu_top(
         .id_flush  (id_flush)
     );
 
-    regfile u_regfile (
+    pipeline_regfile u_regfile (
         .clk         (clk),
         .rst         (reset),
         .r1_enable_i (rf_r1_enable_o),
@@ -243,7 +242,6 @@ module cpu_top(
         .rf_w_addr_o   (rf_w_addr_o)
     );
 
-    // 无 ID 级“提前跳转”时，关闭 id_flush_flag，仅由 EX 的 ex_b_flag 冲刷流水线
     ctrl u_ctrl (
         .rst             (reset),
         .if_stall_req    (if_stall_req),

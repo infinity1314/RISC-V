@@ -30,8 +30,7 @@ module EX(
     wire           alu_zero;
     wire           alu_overflow;
 
-    // 使用 EX 阶段的两个源操作数驱动 ALU
-    ALU u_alu (
+    pl_ALU u_alu (
         .source1 (ex_r1_data_i),
         .source2 (ex_r2_data_i),
         .aluop   (ex_aluop_i),

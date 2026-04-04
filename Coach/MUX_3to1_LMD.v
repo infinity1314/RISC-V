@@ -4,7 +4,7 @@
 module MUX_3to1_LMD(X, Y, Z, control, out);
     input [31:0] X;       // 来自 ALU 的结果 (ALU_result)
     input [31:0] Y;       // 来自数据存储器的数据 (RD)
-    input [31:2] Z;       // 来自 PC 的返回地址 (PC+4)，注意这里截取了 31:2
+    input [29:0] Z;       // PC+4 的高 30 位（与 PCA4[31:2] 同宽，便于综合工具对齐端口）
     input [1:0]  control; // 控制信号 WDSel
     output reg [31:0] out;
 

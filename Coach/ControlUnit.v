@@ -117,8 +117,13 @@ module ControlUnit(
                         endcase
                     end
 
-                    `INSTR_LW_OP,
+                    `INSTR_LW_OP: begin
+                        ALUSrcB = `ALUSrcB_Imm;
+                        ALUOp   = `ALUOp_ADD;
+                    end
+
                     `INSTR_SW_OP: begin
+                        // SW 地址计算同样走 EXT 输出；S-type 由 riscv.v 里 ImmForExt 选择
                         ALUSrcB = `ALUSrcB_Imm;
                         ALUOp   = `ALUOp_ADD;
                     end
